@@ -1,0 +1,1 @@
+ngrok/ngrok -config=ngrok/ngrok.cfg -subdomain shulambo 7771
