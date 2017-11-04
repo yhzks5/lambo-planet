@@ -15,9 +15,9 @@
      
      有一些子模块你是必须要建立的,可以参考lambo-demo建立，主要是为了使用代码生成快速的构建代码，毕竟手动效率相对来说比较低。
      
- ### test-dao pom 文件
+### test-dao pom 文件
  
- {% highlight xml %}
+```xml
  <?xml version="1.0" encoding="UTF-8"?>
  <project xmlns="http://maven.apache.org/POM/4.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -91,11 +91,11 @@
          </plugins>
      </build>
  </project>
- {% endhighlight %}
+```
+
+### test-rpc-api pom
  
- ### test-rpc-api pom
- 
-  {% highlight xml %}
+```xml
  <?xml version="1.0" encoding="UTF-8"?>
  <project xmlns="http://maven.apache.org/POM/4.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -113,11 +113,11 @@
  
  
  </project>
- {% endhighlight %}
+```
  
- ### test-rpc-service pom
+### test-rpc-service pom
  
- {% highlight xml %}
+```xml
  <?xml version="1.0" encoding="UTF-8"?>
  <project xmlns="http://maven.apache.org/POM/4.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -135,18 +135,20 @@
  
  
  </project>
- {% endhighlight %}
+```
  
- ## 3.添加相关的package
+## 3.添加相关的package
  
  三层的package都最好自己添加，不然在自动生成代码的时候可能会爆出缺少文件路径的问题
  
- ### test-dao 
-     ⑴.添加cn.ts.dao包，再继续在这个下面添加mapper和mdoel的package
+### test-dao 
+⑴.添加cn.ts.dao包，再继续在这个下面添加mapper和mdoel的package
+
      ![参考图](project-ui/images/test-dao.png)
-     ⑵.复制粘贴别的模块的Generator.java和generator.properties
-        Generator.java代码：
-        {% highlight java %}
+     
+⑵.复制粘贴别的模块的Generator.java和generator.properties
+    Generator.java代码：
+```java
             // 根据命名规范，只修改此常量值即可
             /**
              * 根据模板生成generatorConfig.xml文件
@@ -180,61 +182,65 @@
             public static void main(String[] args) throws Exception {
                 MybatisGeneratorUtil.generator(JDBC_DRIVER, JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD, MODULE, DATABASE, TABLE_PREFIX, PACKAGE_NAME, LAST_INSERT_ID_TABLES);
             }
-        {% endhighlight %}
-        generator.properties配置：
-        {% highlight xml %}
+```
+
+generator.properties配置：
+```xml
             generator.jdbc.driver=com.mysql.jdbc.Driver
             generator.jdbc.url=jdbc\:mysql\://dbserver\:3306/lambo?useUnicode\=true&characterEncoding\=utf-8&autoReconnect\=true
             generator.jdbc.username=root
             generator.jdbc.password=2eTCS06SBfrVKFGZuvEjTA==
-        {% endhighlight %}
+```
      
-     ⑶.java文件缺少的包，自己在dao的pom文件里面添加下面的依赖就ok了
+⑶.java文件缺少的包，自己在dao的pom文件里面添加下面的依赖就ok了
      
-     {% highlight xml %}
+```xml
      <dependency>
          <groupId>com.lambo</groupId>
          <artifactId>lambo-common</artifactId>
          <version>1.0.0</version>
          <type>jar</type>
      </dependency>
-     {% endhighlight %}
+```
   
- ### test-rpc-api 
-     添加cn.ts.test.api的package
-     ![参考图](project-ui/images/test-rpc-api.png)
- ### test-rpc-service
-     {% highlight xml %}
-         cn.ts.test.dao.mapper
-         cn.ts.test.rpc.mapper
-         cn.ts.test.rpc.service.impl
-     {% endhighlight %}
-     ![参考图](project-ui/images/test-rpc-service.png)
+### test-rpc-api 
+    添加cn.ts.test.api的package
      
- ## 4.完成以上的操作基本上就可以用代码自动生成进行基础代码的构建
-    log打印结果如下：
-    {% highlight xml %}
-        ========== 开始生成generatorConfig.xml文件 ==========
-        数据库连接成功
-        t_company
-        t_user
-        释放数据库连接
-        ========== 结束生成generatorConfig.xml文件 ==========
-        ========== 开始运行MybatisGenerator ==========
-        log4j:WARN No appenders could be found for logger (org.mybatis.generator.internal.db.DatabaseIntrospector).
-        log4j:WARN Please initialize the log4j system properly.
-        ========== 结束运行MybatisGenerator ==========
-        ========== 开始生成Service ==========
-        D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TCompanyService.java
-        D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TCompanyServiceMock.java
-        D:/workspace/lambo/test/test-rpc-service/src/main/java/cn/ts/test/rpc/service/impl/TCompanyServiceImpl.java
-        D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TProductService.java
-        D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TProductServiceMock.java
-        D:/workspace/lambo/test/test-rpc-service/src/main/java/cn/ts/test/rpc/service/impl/TProductServiceImpl.java
-        ========== 结束生成Service ==========
-    {% endhighlight %}
-    当然，也可以把common的模块先建立起来，再在“test-dao”的模块中引用“test-common”的depedence,”test-common”中去引用“lambo-common”的depedence
+![参考图](project-ui/images/test-rpc-api.png)
+     
+### test-rpc-service
+```xml
+     cn.ts.test.dao.mapper
+     cn.ts.test.rpc.mapper
+     cn.ts.test.rpc.service.impl
+```
+![参考图](project-ui/images/test-rpc-service.png)
+     
+## 4.完成以上的操作基本上就可以用代码自动生成进行基础代码的构建
+log打印结果如下：
+```xml
+    ========== 开始生成generatorConfig.xml文件 ==========
+    数据库连接成功
+    t_company
+    t_user
+    释放数据库连接
+    ========== 结束生成generatorConfig.xml文件 ==========
+    ========== 开始运行MybatisGenerator ==========
+    log4j:WARN No appenders could be found for logger (org.mybatis.generator.internal.db.DatabaseIntrospector).
+    log4j:WARN Please initialize the log4j system properly.
+    ========== 结束运行MybatisGenerator ==========
+    ========== 开始生成Service ==========
+    D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TCompanyService.java
+    D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TCompanyServiceMock.java
+    D:/workspace/lambo/test/test-rpc-service/src/main/java/cn/ts/test/rpc/service/impl/TCompanyServiceImpl.java
+    D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TProductService.java
+    D:/workspace/lambo/test/test-rpc-api/src/main/java/cn/ts/test/rpc/api/TProductServiceMock.java
+    D:/workspace/lambo/test/test-rpc-service/src/main/java/cn/ts/test/rpc/service/impl/TProductServiceImpl.java
+    ========== 结束生成Service ==========
+```
+
+当然，也可以把common的模块先建立起来，再在“test-dao”的模块中引用“test-common”的depedence,”test-common”中去引用“lambo-common”的depedence
     
-    附（完整项目参考图）：
+附（完整项目参考图）：
     
-    ![参考图](project-ui/images/test.png)
+![参考图](project-ui/images/test.png)
