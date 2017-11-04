@@ -38,8 +38,8 @@
  
      <dependencies>
          <dependency>
-             <groupId>com.zheng</groupId>
-             <artifactId>zheng-common</artifactId>
+             <groupId>com.lambo</groupId>
+             <artifactId>lambo-common</artifactId>
              <version>1.0.0</version>
              <type>jar</type>
          </dependency>
@@ -144,7 +144,7 @@
 ### test-dao 
 ⑴.添加cn.ts.dao包，再继续在这个下面添加mapper和mdoel的package
 
-![参考图](project-ui/images/test-dao.png)
+![参考图](../project-ui/images/test-dao.png)
      
 ⑵.复制粘贴别的模块的Generator.java和generator.properties
     Generator.java代码：
@@ -206,7 +206,7 @@ generator.properties配置：
 ### test-rpc-api 
     添加cn.ts.test.api的package
      
-![参考图](project-ui/images/test-rpc-api.png)
+![参考图](../project-ui/images/test-rpc-api.png)
      
 ### test-rpc-service
 ```xml
@@ -214,7 +214,7 @@ generator.properties配置：
      cn.ts.test.rpc.mapper
      cn.ts.test.rpc.service.impl
 ```
-![参考图](project-ui/images/test-rpc-service.png)
+![参考图](../project-ui/images/test-rpc-service.png)
      
 ## 4.完成以上的操作基本上就可以用代码自动生成进行基础代码的构建
 log打印结果如下：
@@ -243,4 +243,4 @@ log打印结果如下：
     
 附（完整项目参考图）：
     
-![参考图](project-ui/images/test.png)
+![参考图](../project-ui/images/test.png)
