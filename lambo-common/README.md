@@ -6,10 +6,10 @@
 
 ## 1.新建一个maven模块
 
-{% highlight xml %}
+```xml
     <groupId>cn.ts</groupId>
     <artifactId>test</artifactId>
-{% endhighlight %}
+```
 
 ## 2.建立对应的子模块
      
