@@ -16,6 +16,7 @@ import com.lambo.upms.rpc.api.UpmsPermissionService;
 import com.lambo.upms.rpc.api.UpmsSystemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -33,7 +34,7 @@ import java.util.Map;
 
 /**
  * 权限controller
- * Created by shulambo on 2017/2/6.
+ * Created by lambo on 2017/2/6.
  */
 @Controller
 @Api(value = "权限管理", description = "权限管理")
@@ -51,12 +52,6 @@ public class UpmsPermissionController extends BaseController {
     @Autowired
     private UpmsApiService upmsApiService;
 
-    @ApiOperation(value = "权限首页")
-    @RequiresPermissions("upms:permission:read")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "/manage/permission/index.jsp";
-    }
 
     @ApiOperation(value = "权限列表")
     @RequiresPermissions("upms:permission:read")
@@ -98,6 +93,7 @@ public class UpmsPermissionController extends BaseController {
     @RequestMapping(value = "/role/{id}", method = RequestMethod.POST)
     @ResponseBody
     public Object role(@PathVariable("id") int id) {
+
         return upmsPermissionService.getTreeByRoleId(id);
     }
 
@@ -105,36 +101,49 @@ public class UpmsPermissionController extends BaseController {
     @RequiresPermissions("upms:permission:read")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object user(@PathVariable("id") int id, HttpServletRequest request) {
-        return upmsPermissionService.getTreeByUserId(id, NumberUtils.toByte(request.getParameter("type")));
+    public Object user(
+            @PathVariable("id") int id,
+            @ApiParam(name = "type", required = true, value = "类型(1:目录,2:菜单,3:按钮)")
+            @RequestParam(required = false, value = "type") String type) {
+
+        return upmsPermissionService.getTreeByUserId(id, NumberUtils.toByte(type));
     }
 
-    @ApiOperation(value = "新增权限")
-    @RequiresPermissions("upms:permission:create")
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(ModelMap modelMap) {
-        UpmsSystemExample upmsSystemExample = new UpmsSystemExample();
-        upmsSystemExample.createCriteria()
-                .andStatusEqualTo((byte) 1);
-        List<UpmsSystem> upmsSystems = upmsSystemService.selectByExample(upmsSystemExample);
-        modelMap.put("upmsSystems", upmsSystems);
-        return "/manage/permission/create.jsp";
-    }
 
     @ApiOperation(value = "新增权限")
     @RequiresPermissions("upms:permission:create")
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Object create(UpmsPermission upmsPermission) {
+    public Object create(
+            @RequestParam(required = true, value = "systemId") int systemId,
+            @RequestParam(required = true, value = "pid") int pid,
+            @RequestParam(required = true, value = "name") String name,
+            @ApiParam(name = "type", required = true, value = "类型(1:目录,2:菜单,3:按钮)")
+            @RequestParam(required = true, value = "type") String type,
+            @RequestParam(required = false, value = "permissionValue") String permissionValue,
+            @RequestParam(required = false, value = "uri") String uri,
+            @RequestParam(required = false, value = "icon") String icon,
+            @ApiParam(name = "status", required = true, value = "状态(0:禁止,1:正常)")
+            @RequestParam(required = false, value = "status") String status) {
+
         ComplexResult result = FluentValidator.checkAll()
-                .on(upmsPermission.getName(), new LengthValidator(1, 20, "名称"))
+                .on(name, new LengthValidator(1, 20, "名称"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
         }
+        UpmsPermission upmsPermission = new UpmsPermission();
         long time = System.currentTimeMillis();
+        upmsPermission.setSystemId(systemId);
+        upmsPermission.setPid(pid);
+        upmsPermission.setName(name);
+        upmsPermission.setType(NumberUtils.toByte(type));
+        upmsPermission.setPermissionValue(permissionValue);
+        upmsPermission.setUri(uri);
+        upmsPermission.setIcon(icon);
         upmsPermission.setCtime(time);
+        upmsPermission.setStatus(NumberUtils.toByte(status));
         upmsPermission.setOrders(time);
         int count = upmsPermissionService.insertSelective(upmsPermission);
         return new UpmsResult(UpmsResultConstant.SUCCESS, count);
@@ -151,31 +160,39 @@ public class UpmsPermissionController extends BaseController {
 
     @ApiOperation(value = "修改权限")
     @RequiresPermissions("upms:permission:update")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String update(@PathVariable("id") int id, ModelMap modelMap) {
-        UpmsSystemExample upmsSystemExample = new UpmsSystemExample();
-        upmsSystemExample.createCriteria()
-                .andStatusEqualTo((byte) 1);
-        List<UpmsSystem> upmsSystems = upmsSystemService.selectByExample(upmsSystemExample);
-        UpmsPermission permission = upmsPermissionService.selectByPrimaryKey(id);
-        modelMap.put("permission", permission);
-        modelMap.put("upmsSystems", upmsSystems);
-        return "/manage/permission/update.jsp";
-    }
-
-    @ApiOperation(value = "修改权限")
-    @RequiresPermissions("upms:permission:update")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object update(@PathVariable("id") int id, UpmsPermission upmsPermission) {
+    public Object update(
+            @PathVariable("id") int id,
+            @RequestParam(required = true, value = "systemId") int systemId,
+            @RequestParam(required = true, value = "pid") int pid,
+            @RequestParam(required = true, value = "name") String name,
+            @ApiParam(name = "type", required = true, value = "类型(1:目录,2:菜单,3:按钮)")
+            @RequestParam(required = true, value = "type") String type,
+            @RequestParam(required = false, value = "permissionValue") String permissionValue,
+            @RequestParam(required = false, value = "uri") String uri,
+            @RequestParam(required = false, value = "icon") String icon,
+            @ApiParam(name = "status", required = true, value = "状态(0:禁止,1:正常)")
+            @RequestParam(required = false, value = "status") String status) {
+
         ComplexResult result = FluentValidator.checkAll()
-                .on(upmsPermission.getName(), new LengthValidator(1, 20, "名称"))
+                .on(name, new LengthValidator(1, 20, "名称"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
         }
+        UpmsPermission upmsPermission = new UpmsPermission();
         upmsPermission.setPermissionId(id);
+        upmsPermission.setSystemId(systemId);
+        upmsPermission.setPid(pid);
+        upmsPermission.setName(name);
+        upmsPermission.setType(NumberUtils.toByte(type));
+        upmsPermission.setPermissionValue(permissionValue);
+        upmsPermission.setUri(uri);
+        upmsPermission.setIcon(icon);
+        upmsPermission.setStatus(NumberUtils.toByte(status));
+
         int count = upmsPermissionService.updateByPrimaryKeySelective(upmsPermission);
         return new UpmsResult(UpmsResultConstant.SUCCESS, count);
     }

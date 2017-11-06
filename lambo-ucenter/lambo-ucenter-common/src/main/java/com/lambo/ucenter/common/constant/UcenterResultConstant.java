@@ -2,7 +2,7 @@ package com.lambo.ucenter.common.constant;
 
 /**
  * ucenter系统接口结果常量枚举类
- * Created by shulambo on 2017/4/26.
+ * Created by lambo on 2017/4/26.
  */
 public enum UcenterResultConstant {
 

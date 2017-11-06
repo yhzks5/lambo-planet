@@ -9,7 +9,7 @@ import javax.servlet.ServletContext;
 
 /**
  * 启动解压lamboAdmin-x.x.x.jar到resources目录
- * Created by shulambo on 2016/12/18.
+ * Created by lambo on 2016/12/18.
  */
 public class LamboAdminUtil implements InitializingBean, ServletContextAware {
 

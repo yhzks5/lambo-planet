@@ -1,1 +1,1 @@
-start ngrok/ngrok -config=ngrok/ngrok.cfg -subdomain shulambo 7771
+start ngrok/ngrok -config=ngrok/ngrok.cfg -subdomain lambo 7771

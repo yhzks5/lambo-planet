@@ -4,7 +4,7 @@ import com.lambo.common.base.BaseResult;
 
 /**
  * upms系统常量枚举类
- * Created by shulambo on 2017/2/18.
+ * Created by lambo on 2017/2/18.
  */
 public class UpmsResult extends BaseResult {
 

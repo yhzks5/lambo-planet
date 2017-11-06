@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 服务启动类
- * Created by ZhangShulambo on 2017/6/19.
+ * Created by lambo on 2017/6/19.
  */
 public class LamboUcenterRpcServiceApplication {
 

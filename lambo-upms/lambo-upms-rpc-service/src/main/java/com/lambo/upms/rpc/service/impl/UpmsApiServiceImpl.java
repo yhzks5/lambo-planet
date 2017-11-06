@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * UpmsApiService实现
- * Created by shulambo on 2016/01/19.
+ * Created by lambo on 2016/01/19.
  */
 @Service
 @Transactional

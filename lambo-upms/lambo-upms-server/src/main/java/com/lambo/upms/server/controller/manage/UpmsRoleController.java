@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  * 角色controller
- * Created by shulambo on 2017/2/6.
+ * Created by lambo on 2017/2/6.
  */
 @Controller
 @Api(value = "角色管理", description = "角色管理")
@@ -45,28 +45,14 @@ public class UpmsRoleController extends BaseController {
     @Autowired
     private UpmsRolePermissionService upmsRolePermissionService;
 
-    @ApiOperation(value = "角色首页")
-    @RequiresPermissions("upms:role:read")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "/manage/role/index.jsp";
-    }
-
-    @ApiOperation(value = "角色权限")
-    @RequiresPermissions("upms:role:permission")
-    @RequestMapping(value = "/permission/{id}", method = RequestMethod.GET)
-    public String permission(@PathVariable("id") int id, ModelMap modelMap) {
-        UpmsRole role = upmsRoleService.selectByPrimaryKey(id);
-        modelMap.put("role", role);
-        return "/manage/role/permission.jsp";
-    }
-
     @ApiOperation(value = "角色权限")
     @RequiresPermissions("upms:role:permission")
     @RequestMapping(value = "/permission/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object permission(@PathVariable("id") int id, HttpServletRequest request) {
-        JSONArray datas = JSONArray.parseArray(request.getParameter("datas"));
+    public Object permission(
+            @PathVariable("id") int id,
+            @RequestParam(required = true, value = "dataJson") String dataJson) {
+        JSONArray datas = JSONArray.parseArray(dataJson);
         int result = upmsRolePermissionService.rolePermission(datas, id);
         return new UpmsResult(UpmsResultConstant.SUCCESS, result);
     }
@@ -99,13 +85,6 @@ public class UpmsRoleController extends BaseController {
 
     @ApiOperation(value = "新增角色")
     @RequiresPermissions("upms:role:create")
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create() {
-        return "/manage/role/create.jsp";
-    }
-
-    @ApiOperation(value = "新增角色")
-    @RequiresPermissions("upms:role:create")
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Object create(UpmsRole upmsRole) {
@@ -133,13 +112,13 @@ public class UpmsRoleController extends BaseController {
         return new UpmsResult(UpmsResultConstant.SUCCESS, count);
     }
 
-    @ApiOperation(value = "修改角色")
-    @RequiresPermissions("upms:role:update")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String update(@PathVariable("id") int id, ModelMap modelMap) {
+    @ApiOperation(value = "根据ID查询角色")
+    @RequiresPermissions("upms:role:read")
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object get(@PathVariable("id") int id, ModelMap modelMap) {
         UpmsRole role = upmsRoleService.selectByPrimaryKey(id);
-        modelMap.put("role", role);
-        return "/manage/role/update.jsp";
+        return new UpmsResult(UpmsResultConstant.SUCCESS, role);
     }
 
     @ApiOperation(value = "修改角色")

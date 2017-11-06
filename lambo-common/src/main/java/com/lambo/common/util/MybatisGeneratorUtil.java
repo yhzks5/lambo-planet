@@ -15,7 +15,7 @@ import static com.lambo.common.util.StringUtil.lineToHump;
 
 /**
  * 代码生成类
- * Created by ZhangShulambo on 2017/1/10.
+ * Created by lambo on 2017/1/10.
  */
 public class MybatisGeneratorUtil {
 

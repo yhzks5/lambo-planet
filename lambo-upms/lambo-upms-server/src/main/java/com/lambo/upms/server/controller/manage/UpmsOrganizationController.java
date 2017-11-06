@@ -12,6 +12,7 @@ import com.lambo.upms.dao.model.UpmsOrganizationExample;
 import com.lambo.upms.rpc.api.UpmsOrganizationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 /**
  * 组织controller
- * Created by shulambo on 2017/2/6.
+ * Created by lambo on 2017/2/6.
  */
 @Controller
 @Api(value = "组织管理", description = "组织管理")
@@ -38,13 +39,6 @@ public class UpmsOrganizationController extends BaseController {
 
     @Autowired
     private UpmsOrganizationService upmsOrganizationService;
-
-    @ApiOperation(value = "组织首页")
-    @RequiresPermissions("upms:organization:read")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "/manage/organization/index.jsp";
-    }
 
     @ApiOperation(value = "组织列表")
     @RequiresPermissions("upms:organization:read")
@@ -74,24 +68,25 @@ public class UpmsOrganizationController extends BaseController {
 
     @ApiOperation(value = "新增组织")
     @RequiresPermissions("upms:organization:create")
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create() {
-        return "/manage/organization/create.jsp";
-    }
-
-    @ApiOperation(value = "新增组织")
-    @RequiresPermissions("upms:organization:create")
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Object create(UpmsOrganization upmsOrganization) {
+    public Object create(
+            @RequestParam(required = true, value = "pid") int pid,
+            @RequestParam(required = true, value = "name") String name,
+            @RequestParam(required = false, value = "description") String description) {
+
         ComplexResult result = FluentValidator.checkAll()
-                .on(upmsOrganization.getName(), new LengthValidator(1, 20, "名称"))
+                .on(name, new LengthValidator(1, 20, "名称"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
         }
         long time = System.currentTimeMillis();
+        UpmsOrganization upmsOrganization = new UpmsOrganization();
+        upmsOrganization.setPid(pid);
+        upmsOrganization.setName(name);
+        upmsOrganization.setDescription(description);
         upmsOrganization.setCtime(time);
         int count = upmsOrganizationService.insertSelective(upmsOrganization);
         return new UpmsResult(UpmsResultConstant.SUCCESS, count);
@@ -108,28 +103,28 @@ public class UpmsOrganizationController extends BaseController {
 
     @ApiOperation(value = "修改组织")
     @RequiresPermissions("upms:organization:update")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String update(@PathVariable("id") int id, ModelMap modelMap) {
-        UpmsOrganization organization = upmsOrganizationService.selectByPrimaryKey(id);
-        modelMap.put("organization", organization);
-        return "/manage/organization/update.jsp";
-    }
-
-    @ApiOperation(value = "修改组织")
-    @RequiresPermissions("upms:organization:update")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object update(@PathVariable("id") int id, UpmsOrganization upmsOrganization) {
+    public Object update(
+            @PathVariable("id") int id,
+            @RequestParam(required = true, value = "pid") int pid,
+            @RequestParam(required = true, value = "name") String name,
+            @RequestParam(required = false, value = "description") String description) {
+
         ComplexResult result = FluentValidator.checkAll()
-                .on(upmsOrganization.getName(), new LengthValidator(1, 20, "名称"))
+                .on(name, new LengthValidator(1, 20, "名称"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
         }
+        UpmsOrganization upmsOrganization = new UpmsOrganization();
         upmsOrganization.setOrganizationId(id);
+        upmsOrganization.setPid(pid);
+        upmsOrganization.setName(name);
+        upmsOrganization.setDescription(description);
+
         int count = upmsOrganizationService.updateByPrimaryKeySelective(upmsOrganization);
         return new UpmsResult(UpmsResultConstant.SUCCESS, count);
     }
-
 }

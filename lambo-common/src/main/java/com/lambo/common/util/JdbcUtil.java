@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * JDBC工具类
- * Created by ZhangShulambo on 2017/1/10.
+ * Created by lambo on 2017/1/10.
  */
 public class JdbcUtil {
 

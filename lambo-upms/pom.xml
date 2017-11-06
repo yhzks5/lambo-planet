@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <name>lambo-upms</name>
-    <url>http://www.zhangshulambo.cn</url>
+    <url>http://www.zhanglambo.cn</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

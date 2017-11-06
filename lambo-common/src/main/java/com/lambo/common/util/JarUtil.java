@@ -6,7 +6,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * Created by shulambo on 2016/12/18.
+ * Created by lambo on 2016/12/18.
  */
 public class JarUtil {
 

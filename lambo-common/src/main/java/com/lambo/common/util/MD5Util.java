@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.util.UUID;
 
 /**
- * Created by shulambo on 2017/1/19.
+ * Created by lambo on 2017/1/19.
  */
 public class MD5Util {
 

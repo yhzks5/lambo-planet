@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * 测试controller
- * Created by shulambo on 2017/3/21.
+ * Created by lambo on 2017/3/21.
  */
 @Controller
 public class IndexController extends BaseController {
@@ -42,7 +42,7 @@ public class IndexController extends BaseController {
 	 */
 	@RequestMapping(value = "/thymeleaf", method = RequestMethod.GET)
 	public String thymeleaf(Model model) {
-		model.addAttribute("host", demoService.sayHello("http://www.zhangshulambo.cn/"));
+		model.addAttribute("host", demoService.sayHello("http://www.zhanglambo.cn/"));
 		List<User> users = new ArrayList<>();
 		User user = new User();
 		user.setId(1l);

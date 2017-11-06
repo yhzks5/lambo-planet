@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  * 用户controller
- * Created by shulambo on 2017/2/6.
+ * Created by lambo on 2017/2/6.
  */
 @Controller
 @Api(value = "用户管理", description = "用户管理")

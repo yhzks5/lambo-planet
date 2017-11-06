@@ -16,7 +16,7 @@ import java.util.*;
 
 /**
  * 基于redis的sessionDao，缓存共享session
- * Created by shulambo on 2017/2/23.
+ * Created by lambo on 2017/2/23.
  */
 public class UpmsSessionDao extends CachingSessionDAO {
 

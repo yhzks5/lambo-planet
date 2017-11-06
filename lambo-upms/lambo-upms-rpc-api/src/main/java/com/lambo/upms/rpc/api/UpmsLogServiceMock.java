@@ -7,7 +7,7 @@ import com.lambo.upms.dao.model.UpmsLogExample;
 
 /**
 * 降级实现UpmsLogService接口
-* Created by shulambo on 2017/3/20.
+* Created by lambo on 2017/3/20.
 */
 public class UpmsLogServiceMock extends BaseServiceMock<UpmsLogMapper, UpmsLog, UpmsLogExample> implements UpmsLogService {
 

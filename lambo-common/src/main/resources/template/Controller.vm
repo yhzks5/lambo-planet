@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * ${modelname}controller
- * Created by shulambo on ${ctime}.
+ * Created by lambo on ${ctime}.
  */
 @Controller
 @RequestMapping("/manage")

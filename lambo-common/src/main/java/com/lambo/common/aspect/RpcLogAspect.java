@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * rpc提供者和消费者日志打印
- * Created by ZhangShulambo on 2017/4/19.
+ * Created by lambo on 2017/4/19.
  */
 public class RpcLogAspect {
 

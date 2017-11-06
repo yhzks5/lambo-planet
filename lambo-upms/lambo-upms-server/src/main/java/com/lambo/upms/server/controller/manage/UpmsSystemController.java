@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * 系统controller
- * Created by shulambo on 2016/12/18.
+ * Created by lambo on 2016/12/18.
  */
 @Controller
 @Api(value = "系统管理", description = "系统管理")
@@ -38,13 +38,6 @@ public class UpmsSystemController extends BaseController {
 
 	@Autowired
 	private UpmsSystemService upmsSystemService;
-
-	@ApiOperation(value = "系统首页")
-	@RequiresPermissions("upms:system:read")
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index() {
-		return "/manage/system/index.jsp";
-	}
 
 	@ApiOperation(value = "系统列表")
 	@RequiresPermissions("upms:system:read")
@@ -70,13 +63,6 @@ public class UpmsSystemController extends BaseController {
 		result.put("rows", rows);
 		result.put("total", total);
 		return result;
-	}
-
-	@ApiOperation(value = "新增系统")
-	@RequiresPermissions("upms:system:create")
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String create() {
-		return "/manage/system/create.jsp";
 	}
 
 	@ApiOperation(value = "新增系统")
@@ -108,13 +94,13 @@ public class UpmsSystemController extends BaseController {
 		return new UpmsResult(UpmsResultConstant.SUCCESS, count);
 	}
 
-	@ApiOperation(value = "修改系统")
-	@RequiresPermissions("upms:system:update")
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String update(@PathVariable("id") int id, ModelMap modelMap) {
+	@ApiOperation(value = "根据ID查询系统")
+	@RequiresPermissions("upms:system:read")
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Object get(@PathVariable("id") int id) {
 		UpmsSystem system = upmsSystemService.selectByPrimaryKey(id);
-		modelMap.put("system", system);
-		return "/manage/system/update.jsp";
+		return new UpmsResult(UpmsResultConstant.SUCCESS, system);
 	}
 
 	@ApiOperation(value = "修改系统")
