@@ -1,1 +1,0 @@
-ngrok/ngrok -config=ngrok/ngrok.cfg -subdomain lambo 7771
