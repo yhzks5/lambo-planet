@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * 日志controller
- * Created by shulambo on 2017/3/14.
+ * Created by lambo on 2017/3/14.
  */
 @Controller
 @Api(value = "日志管理", description = "日志管理")
@@ -34,13 +34,6 @@ public class UpmsLogController extends BaseController {
 
     @Autowired
     private UpmsLogService upmsLogService;
-
-    @ApiOperation(value = "日志首页")
-    @RequiresPermissions("upms:log:read")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "/manage/log/index.jsp";
-    }
 
     @ApiOperation(value = "日志列表")
     @RequiresPermissions("upms:log:read")

@@ -38,7 +38,7 @@ import java.util.UUID;
 
 /**
  * 单点登录管理
- * Created by shulambo on 2016/12/10.
+ * Created by lambo on 2016/12/10.
  */
 @Controller
 @RequestMapping("/sso")
@@ -62,52 +62,6 @@ public class SSOController extends BaseController {
     @Autowired
     UpmsSessionDao upmsSessionDao;
 
-    @ApiOperation(value = "认证中心首页")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(HttpServletRequest request) throws Exception {
-        String appid = request.getParameter("appid");
-        String backurl = request.getParameter("backurl");
-        if (StringUtils.isBlank(appid)) {
-            throw new RuntimeException("无效访问！");
-        }
-        // 判断请求认证系统是否注册
-        UpmsSystemExample upmsSystemExample = new UpmsSystemExample();
-        upmsSystemExample.createCriteria()
-                .andNameEqualTo(appid);
-        int count = upmsSystemService.countByExample(upmsSystemExample);
-        if (0 == count) {
-            throw new RuntimeException(String.format("未注册的系统:%s", appid));
-        }
-        return "redirect:/sso/login?backurl=" + URLEncoder.encode(backurl, "utf-8");
-    }
-
-    @ApiOperation(value = "登录")
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(HttpServletRequest request) {
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        String serverSessionId = session.getId().toString();
-        // 判断是否已登录，如果已登录，则回跳
-        String code = RedisUtil.get(LAMBO_UPMS_SERVER_SESSION_ID + "_" + serverSessionId);
-        // code校验值
-        if (StringUtils.isNotBlank(code)) {
-            // 回跳
-            String backurl = request.getParameter("backurl");
-            String username = (String) subject.getPrincipal();
-            if (StringUtils.isBlank(backurl)) {
-                backurl = "/";
-            } else {
-                if (backurl.contains("?")) {
-                    backurl += "&upms_code=" + code + "&upms_username=" + username;
-                } else {
-                    backurl += "?upms_code=" + code + "&upms_username=" + username;
-                }
-            }
-            _log.debug("认证中心帐号通过，带code回跳：{}", backurl);
-            return "redirect:" + backurl;
-        }
-        return "/sso/login.jsp";
-    }
 
     @ApiOperation(value = "登录" ,notes = "验证登录信息,返回结果,如果当前已有用户登录,在执行注销操作前,会一直返回成功结果")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -173,11 +127,13 @@ public class SSOController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "校验code")
+    @ApiOperation(value = "校验code",notes = "用于单点登录时校验code是否合法")
     @RequestMapping(value = "/code", method = RequestMethod.POST)
     @ResponseBody
-    public Object code(HttpServletRequest request) {
-        String codeParam = request.getParameter("code");
+    public Object code(
+            @ApiParam(name = "codeParam", required = true, value = "待校验的code")
+            @RequestParam(value = "codeParam") String codeParam) {
+
         String code = RedisUtil.get(LAMBO_UPMS_SERVER_CODE + "_" + codeParam);
         if (StringUtils.isBlank(codeParam) || !codeParam.equals(code)) {
             new UpmsResult(UpmsResultConstant.FAILED, "无效code");

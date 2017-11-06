@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 
 /**
  * session序列化工具
- * Created by shulambo on 2017/3/12.
+ * Created by lambo on 2017/3/12.
  */
 public class SerializableUtil {
 

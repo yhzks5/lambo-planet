@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 拦截器
- * Created by shulambo on 2017/3/24.
+ * Created by lambo on 2017/3/24.
  */
 public class DemoInterceptor extends HandlerInterceptorAdapter {
 

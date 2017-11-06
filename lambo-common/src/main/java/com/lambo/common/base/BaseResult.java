@@ -2,7 +2,7 @@ package com.lambo.common.base;
 
 /**
  * 统一返回结果类
- * Created by shulambo on 2017/2/18.
+ * Created by lambo on 2017/2/18.
  */
 public class BaseResult {
 

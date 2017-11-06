@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * BaseService接口
- * Created by ZhangShulambo on 2017/01/07.
+ * Created by lambo on 2017/01/07.
  */
 public interface BaseService<Record, Example> {
 

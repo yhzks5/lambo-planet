@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
 * 降级实现UpmsUserRoleService接口
-* Created by shulambo on 2017/3/20.
+* Created by lambo on 2017/3/20.
 */
 public class UpmsUserRoleServiceMock extends BaseServiceMock<UpmsUserRoleMapper, UpmsUserRole, UpmsUserRoleExample> implements UpmsUserRoleService {
 

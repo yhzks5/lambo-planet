@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 降级实现UpmsApiService接口
- * Created by shulambo on 2017/2/14.
+ * Created by lambo on 2017/2/14.
  */
 public class UpmsApiServiceMock implements UpmsApiService {
 

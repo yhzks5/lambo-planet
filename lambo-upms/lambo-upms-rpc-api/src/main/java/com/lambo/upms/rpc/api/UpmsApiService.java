@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * upms系统接口
- * Created by shulambo on 2017/2/11.
+ * Created by lambo on 2017/2/11.
  */
 public interface UpmsApiService {
 

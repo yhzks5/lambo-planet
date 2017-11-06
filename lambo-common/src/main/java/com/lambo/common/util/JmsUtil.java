@@ -8,7 +8,7 @@ import javax.jms.*;
 import java.io.Serializable;
 
 /**
- * Created by zhangshulambo on 16/11/24.
+ * Created by zhanglambo on 16/11/24.
  */
 public class JmsUtil {
 

@@ -6,7 +6,7 @@ import ${package_name}.dao.model.${model}Example;
 
 /**
 * ${model}Service接口
-* Created by shulambo on ${ctime}.
+* Created by lambo on ${ctime}.
 */
 public interface ${model}Service extends BaseService<${model}, ${model}Example> {
 

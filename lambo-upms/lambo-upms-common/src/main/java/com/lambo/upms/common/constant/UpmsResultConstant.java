@@ -2,7 +2,7 @@ package com.lambo.upms.common.constant;
 
 /**
  * upms系统接口结果常量枚举类
- * Created by shulambo on 2017/2/18.
+ * Created by lambo on 2017/2/18.
  */
 public enum UpmsResultConstant {
 

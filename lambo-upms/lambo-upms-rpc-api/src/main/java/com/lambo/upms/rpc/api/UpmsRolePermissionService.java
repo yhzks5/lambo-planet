@@ -7,7 +7,7 @@ import com.lambo.upms.dao.model.UpmsRolePermissionExample;
 
 /**
 * UpmsRolePermissionService接口
-* Created by shulambo on 2017/3/20.
+* Created by lambo on 2017/3/20.
 */
 public interface UpmsRolePermissionService extends BaseService<UpmsRolePermission, UpmsRolePermissionExample> {
 

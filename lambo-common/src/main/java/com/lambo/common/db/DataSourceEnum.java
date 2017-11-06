@@ -2,7 +2,7 @@ package com.lambo.common.db;
 
 /**
  * 多数据源枚举
- * Created by ZhangShulambo on 2017/1/15.
+ * Created by lambo on 2017/1/15.
  */
 public enum DataSourceEnum {
 

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * session工厂
- * Created by shulambo on 2017/2/27.
+ * Created by lambo on 2017/2/27.
  */
 public class UpmsSessionFactory implements SessionFactory {
 

@@ -2,7 +2,7 @@ package com.lambo.demo.rpc.api;
 
 /**
  * 降级实现DemoService接口
- * Created by shulambo on 2017/4/1.
+ * Created by lambo on 2017/4/1.
  */
 public class DemoServiceMock implements DemoService {
 

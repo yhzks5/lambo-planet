@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * 实现BaseService抽象类
- * Created by ZhangShulambo on 2017/01/07.
+ * Created by lambo on 2017/01/07.
  */
 public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseService<Record, Example> {
 

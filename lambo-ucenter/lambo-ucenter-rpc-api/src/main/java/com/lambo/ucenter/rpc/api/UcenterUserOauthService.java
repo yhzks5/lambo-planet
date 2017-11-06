@@ -6,7 +6,7 @@ import com.lambo.ucenter.dao.model.UcenterUserOauthExample;
 
 /**
 * UcenterUserOauthService接口
-* Created by shulambo on 2017/4/27.
+* Created by lambo on 2017/4/27.
 */
 public interface UcenterUserOauthService extends BaseService<UcenterUserOauth, UcenterUserOauthExample> {
 

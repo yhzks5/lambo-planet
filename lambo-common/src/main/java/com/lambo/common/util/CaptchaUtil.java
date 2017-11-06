@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * 验证码工具类
- * Created by ZhangShulambo on 2017/6/28.
+ * Created by lambo on 2017/6/28.
  */
 public class CaptchaUtil {
 	// 图片的宽度。

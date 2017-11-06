@@ -16,28 +16,26 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 登录信息拦截器
- * Created by shulambo on 2017/2/11.
+ * Created by lambo on 2017/2/11.
  */
 public class UpmsInterceptor extends HandlerInterceptorAdapter {
 
     private static Logger _log = LoggerFactory.getLogger(UpmsInterceptor.class);
-    private static final String LAMBO_OSS_ALIYUN_OSS_POLICY = PropertiesFileUtil.getInstance("lambo-oss-client").get("lambo.oss.aliyun.oss.policy");
 
-    @Autowired
-    UpmsApiService upmsApiService;
+//    @Autowired
+//    UpmsApiService upmsApiService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        request.setAttribute("LAMBO_OSS_ALIYUN_OSS_POLICY", LAMBO_OSS_ALIYUN_OSS_POLICY);
         // 过滤ajax
-        if (null != request.getHeader("X-Requested-With") && request.getHeader("X-Requested-With").equalsIgnoreCase("XMLHttpRequest")) {
-            return true;
-        }
-        // 登录信息
-        Subject subject = SecurityUtils.getSubject();
-        String username = (String) subject.getPrincipal();
-        UpmsUser upmsUser = upmsApiService.selectUpmsUserByUsername(username);
-        request.setAttribute("upmsUser", upmsUser);
+//        if (null != request.getHeader("X-Requested-With") && request.getHeader("X-Requested-With").equalsIgnoreCase("XMLHttpRequest")) {
+//            return true;
+//        }
+//        // 登录信息
+//        Subject subject = SecurityUtils.getSubject();
+//        String username = (String) subject.getPrincipal();
+//        UpmsUser upmsUser = upmsApiService.selectUpmsUserByUsername(username);
+//        request.setAttribute("upmsUser", upmsUser);
         return true;
     }
 

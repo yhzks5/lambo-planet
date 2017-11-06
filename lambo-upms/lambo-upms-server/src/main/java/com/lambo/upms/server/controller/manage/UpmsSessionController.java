@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 会话管理controller
- * Created by shulambo on 2017/2/28.
+ * Created by lambo on 2017/2/28.
  */
 @Controller
 @Api(value = "会话管理", description = "会话管理")
@@ -26,13 +26,6 @@ public class UpmsSessionController extends BaseController {
 
     @Autowired
     private UpmsSessionDao sessionDAO;
-
-    @ApiOperation(value = "会话首页")
-    @RequiresPermissions("upms:session:read")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "/manage/session/index.jsp";
-    }
 
     @ApiOperation(value = "会话列表")
     @RequiresPermissions("upms:session:read")

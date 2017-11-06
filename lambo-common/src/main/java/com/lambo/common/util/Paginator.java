@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 分页实体类
- * @author shulambo
+ * @author lambo
  * @date 2016年7月6日 下午6:05:00
  */
 public class Paginator {

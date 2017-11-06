@@ -48,7 +48,7 @@ CREATE TABLE `cms_article` (
 INSERT INTO `cms_article` VALUES ('3', '0', '中国经济标题1', '1', '1', '1', '1', '1', '1', '1', '0', '资讯内容', '1', '0', '0', '1', '1489827019528', '1489827019528');
 INSERT INTO `cms_article` VALUES ('4', '0', '中国经济标题2', '2', '2', '2', '2', '2', '1', '1', '-1', '资讯内容', '1', '0', '0', '1', '1489827340870', '1489827340870');
 INSERT INTO `cms_article` VALUES ('5', '0', '中国经济标题3', '3', '3', '3', '3', '3', '1', '1', '1', '资讯内容', '1', '0', '0', '1', '1489827581414', '1489827581414');
-INSERT INTO `cms_article` VALUES ('8', '1', '日本从地球消失，我们倍(喜)感(大)心(普)痛(奔)', 'shulambo', '网络', '', '日本消失,日本地震', '日本从地震中消失', '1', '1', '1', '好悲(gao)伤(xing)啊', '1', '12', '0', '1', '1489845594355', '1489845594355');
+INSERT INTO `cms_article` VALUES ('8', '1', '日本从地球消失，我们倍(喜)感(大)心(普)痛(奔)', 'lambo', '网络', '', '日本消失,日本地震', '日本从地震中消失', '1', '1', '1', '好悲(gao)伤(xing)啊', '1', '12', '0', '1', '1489845594355', '1489845594355');
 INSERT INTO `cms_article` VALUES ('9', '0', '中国经济标题4', '4', '4', '4', '4', '4', '1', '1', '1', '资讯内容', '1', '0', '0', '1', '1490460546198', '1490460546198');
 INSERT INTO `cms_article` VALUES ('10', '0', '中国经济标题5', '5', '5', '5', '5', '5', '1', '1', '1', '资讯内容', '1', '0', '0', '1', '1490460567137', '1490460567137');
 INSERT INTO `cms_article` VALUES ('11', '0', '中国经济标题6', '6', '6', '6', '6', '6', '1', '1', '1', '资讯内容', '1', '0', '0', '1', '1490460575304', '1490460575304');
@@ -897,11 +897,11 @@ CREATE TABLE `upms_system` (
 -- ----------------------------
 -- Records of upms_system
 -- ----------------------------
-INSERT INTO `upms_system` VALUES ('1', 'zmdi zmdi-shield-security', '/resources/lambo-admin/images/lambo-upms.png', '#29A176', 'http://upms.zhangshulambo.cn:1111', '1', 'lambo-upms-server', '权限管理系统', '用户权限管理系统（RBAC细粒度用户权限、统一后台、单点登录、会话管理）', '1', '1');
-INSERT INTO `upms_system` VALUES ('2', 'zmdi zmdi-wikipedia', '/resources/lambo-admin/images/lambo-cms.png', '#455EC5', 'http://cms.zhangshulambo.cn:2222', '1', 'lambo-cms-admin', '内容管理系统', '内容管理系统（门户、博客、论坛、问答等）', '2', '2');
-INSERT INTO `upms_system` VALUES ('3', 'zmdi zmdi-paypal-alt', '/resources/lambo-admin/images/lambo-pay.png', '#F06292', 'http://pay.zhangshulambo.cn:3331', '1', 'lambo-pay-admin', '支付管理系统', '支付管理系统', '3', '3');
-INSERT INTO `upms_system` VALUES ('4', 'zmdi zmdi-account', '/resources/lambo-admin/images/lambo-ucenter.png', '#6539B4', 'http://ucenter.zhangshulambo.cn:4441', '1', 'lambo-ucenter-home', '用户管理系统', '用户管理系统', '4', '4');
-INSERT INTO `upms_system` VALUES ('5', 'zmdi zmdi-cloud', '/resources/lambo-admin/images/lambo-oss.png', '#0B8DE5', 'http://oss.zhangshulambo.cn:7771', '1', 'lambo-oss-web', '存储管理系统', '存储管理系统', '5', '5');
+INSERT INTO `upms_system` VALUES ('1', 'zmdi zmdi-shield-security', '/resources/lambo-admin/images/lambo-upms.png', '#29A176', 'http://upms.zhanglambo.cn:1111', '1', 'lambo-upms-server', '权限管理系统', '用户权限管理系统（RBAC细粒度用户权限、统一后台、单点登录、会话管理）', '1', '1');
+INSERT INTO `upms_system` VALUES ('2', 'zmdi zmdi-wikipedia', '/resources/lambo-admin/images/lambo-cms.png', '#455EC5', 'http://cms.zhanglambo.cn:2222', '1', 'lambo-cms-admin', '内容管理系统', '内容管理系统（门户、博客、论坛、问答等）', '2', '2');
+INSERT INTO `upms_system` VALUES ('3', 'zmdi zmdi-paypal-alt', '/resources/lambo-admin/images/lambo-pay.png', '#F06292', 'http://pay.zhanglambo.cn:3331', '1', 'lambo-pay-admin', '支付管理系统', '支付管理系统', '3', '3');
+INSERT INTO `upms_system` VALUES ('4', 'zmdi zmdi-account', '/resources/lambo-admin/images/lambo-ucenter.png', '#6539B4', 'http://ucenter.zhanglambo.cn:4441', '1', 'lambo-ucenter-home', '用户管理系统', '用户管理系统', '4', '4');
+INSERT INTO `upms_system` VALUES ('5', 'zmdi zmdi-cloud', '/resources/lambo-admin/images/lambo-oss.png', '#0B8DE5', 'http://oss.zhanglambo.cn:7771', '1', 'lambo-oss-web', '存储管理系统', '存储管理系统', '5', '5');
 
 -- ----------------------------
 -- Table structure for upms_user

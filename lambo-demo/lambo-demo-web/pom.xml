@@ -12,7 +12,7 @@
     <packaging>war</packaging>
 
     <name>lambo-demo-web Maven Webapp</name>
-    <url>http://www.zhangshulambo.cn</url>
+    <url>http://www.zhanglambo.cn</url>
 
     <dependencies>
         <dependency>
