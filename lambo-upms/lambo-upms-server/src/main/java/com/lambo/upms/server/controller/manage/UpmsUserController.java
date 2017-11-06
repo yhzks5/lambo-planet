@@ -14,6 +14,7 @@ import com.lambo.upms.dao.model.*;
 import com.lambo.upms.rpc.api.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ import java.util.UUID;
 
 /**
  * 用户controller
- * Created by shulambo on 2017/2/6.
+ * Created by lambo on 2017/2/6.
  */
 @Controller
 @Api(value = "用户管理", description = "用户管理")
@@ -58,80 +59,38 @@ public class UpmsUserController extends BaseController {
     @Autowired
     private UpmsUserPermissionService upmsUserPermissionService;
 
-    @ApiOperation(value = "用户首页")
-    @RequiresPermissions("upms:user:read")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "/manage/user/index.jsp";
-    }
-
-    @ApiOperation(value = "用户组织")
-    @RequiresPermissions("upms:user:organization")
-    @RequestMapping(value = "/organization/{id}", method = RequestMethod.GET)
-    public String organization(@PathVariable("id") int id, ModelMap modelMap) {
-        // 所有组织
-        List<UpmsOrganization> upmsOrganizations = upmsOrganizationService.selectByExample(new UpmsOrganizationExample());
-        // 用户拥有组织
-        UpmsUserOrganizationExample upmsUserOrganizationExample = new UpmsUserOrganizationExample();
-        upmsUserOrganizationExample.createCriteria()
-                .andUserIdEqualTo(id);
-        List<UpmsUserOrganization> upmsUserOrganizations = upmsUserOrganizationService.selectByExample(upmsUserOrganizationExample);
-        modelMap.put("upmsOrganizations", upmsOrganizations);
-        modelMap.put("upmsUserOrganizations", upmsUserOrganizations);
-        return "/manage/user/organization.jsp";
-    }
-
     @ApiOperation(value = "用户组织")
     @RequiresPermissions("upms:user:organization")
     @RequestMapping(value = "/organization/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object organization(@PathVariable("id") int id, HttpServletRequest request) {
-        String[] organizationIds = request.getParameterValues("organizationId");
+    public Object organization(
+            @PathVariable("id") int id,
+            @RequestParam(required = true,  value = "orgIds") String orgIds) {
+        String[] organizationIds = orgIds.split(",");
         upmsUserOrganizationService.organization(organizationIds, id);
         return new UpmsResult(UpmsResultConstant.SUCCESS, "");
     }
 
     @ApiOperation(value = "用户角色")
     @RequiresPermissions("upms:user:role")
-    @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
-    public String role(@PathVariable("id") int id, ModelMap modelMap) {
-        // 所有角色
-        List<UpmsRole> upmsRoles = upmsRoleService.selectByExample(new UpmsRoleExample());
-        // 用户拥有角色
-        UpmsUserRoleExample upmsUserRoleExample = new UpmsUserRoleExample();
-        upmsUserRoleExample.createCriteria()
-                .andUserIdEqualTo(id);
-        List<UpmsUserRole> upmsUserRoles = upmsUserRoleService.selectByExample(upmsUserRoleExample);
-        modelMap.put("upmsRoles", upmsRoles);
-        modelMap.put("upmsUserRoles", upmsUserRoles);
-        return "/manage/user/role.jsp";
-    }
-
-    @ApiOperation(value = "用户角色")
-    @RequiresPermissions("upms:user:role")
     @RequestMapping(value = "/role/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object role(@PathVariable("id") int id, HttpServletRequest request) {
-        String[] roleIds = request.getParameterValues("roleId");
+    public Object role(
+            @PathVariable("id") int id,
+            @RequestParam(required = true,  value = "roleIds") String roles) {
+        String[] roleIds = roles.split(",");
         upmsUserRoleService.role(roleIds, id);
         return new UpmsResult(UpmsResultConstant.SUCCESS, "");
     }
 
     @ApiOperation(value = "用户权限")
     @RequiresPermissions("upms:user:permission")
-    @RequestMapping(value = "/permission/{id}", method = RequestMethod.GET)
-    public String permission(@PathVariable("id") int id, ModelMap modelMap) {
-        UpmsUser user = upmsUserService.selectByPrimaryKey(id);
-        modelMap.put("user", user);
-        return "/manage/user/permission.jsp";
-    }
-
-    @ApiOperation(value = "用户权限")
-    @RequiresPermissions("upms:user:permission")
     @RequestMapping(value = "/permission/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object permission(@PathVariable("id") int id, HttpServletRequest request) {
-        JSONArray datas = JSONArray.parseArray(request.getParameter("datas"));
+    public Object permission(
+            @PathVariable("id") int id,
+            @RequestParam(required = true,  value = "datas") String jsonDatas) {
+        JSONArray datas = JSONArray.parseArray(jsonDatas);
         upmsUserPermissionService.permission(datas, id);
         return new UpmsResult(UpmsResultConstant.SUCCESS, datas.size());
     }
@@ -166,29 +125,39 @@ public class UpmsUserController extends BaseController {
 
     @ApiOperation(value = "新增用户")
     @RequiresPermissions("upms:user:create")
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create() {
-        return "/manage/user/create.jsp";
-    }
-
-    @ApiOperation(value = "新增用户")
-    @RequiresPermissions("upms:user:create")
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Object create(UpmsUser upmsUser) {
-        ComplexResult result = FluentValidator.checkAll()
-                .on(upmsUser.getUsername(), new LengthValidator(1, 20, "帐号"))
-                .on(upmsUser.getPassword(), new LengthValidator(5, 32, "密码"))
-                .on(upmsUser.getRealname(), new NotNullValidator("姓名"))
+    public Object create(
+            @ApiParam(required = true, name = "userName", value = "用户账户")
+            @RequestParam(required = true, value = "userName") String userName,
+            @RequestParam(required = true, value = "password") String password,
+            @RequestParam(required = false, defaultValue = "", value = "realName") String realName,
+            @RequestParam(required = false, defaultValue = "", value = "avater") String avater,
+            @RequestParam(required = false, defaultValue = "", value = "phone") String phone,
+            @RequestParam(required = false, defaultValue = "", value = "email") String email,
+            @ApiParam(required = false, name = "sex", value = "用户性别0：女性，1：男性")
+            @RequestParam(required = false, defaultValue = "0", value = "sex") String sex
+    ) {
+        /*ComplexResult result = FluentValidator.checkAll()
+                .on(userName, new LengthValidator(1, 20, "帐号"))
+                .on(password, new LengthValidator(5, 32, "密码"))
+                .on(realName, new NotNullValidator("姓名"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
-        }
+        }*/
+        UpmsUser upmsUser = new UpmsUser();
+        upmsUser.setUsername(userName);
+        upmsUser.setRealname(realName);
+        upmsUser.setAvatar(avater);
+        upmsUser.setPhone(phone);
+        upmsUser.setEmail(email);
+        upmsUser.setSex(Byte.parseByte(sex));
         long time = System.currentTimeMillis();
         String salt = UUID.randomUUID().toString().replaceAll("-", "");
         upmsUser.setSalt(salt);
-        upmsUser.setPassword(MD5Util.MD5(upmsUser.getPassword() + upmsUser.getSalt()));
+        upmsUser.setPassword(MD5Util.MD5(password + upmsUser.getSalt()));
         upmsUser.setCtime(time);
         upmsUser = upmsUserService.createUser(upmsUser);
         if (null == upmsUser) {
@@ -209,25 +178,44 @@ public class UpmsUserController extends BaseController {
 
     @ApiOperation(value = "修改用户")
     @RequiresPermissions("upms:user:update")
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String update(@PathVariable("id") int id, ModelMap modelMap) {
-        UpmsUser user = upmsUserService.selectByPrimaryKey(id);
-        modelMap.put("user", user);
-        return "/manage/user/update.jsp";
-    }
-
-    @ApiOperation(value = "修改用户")
-    @RequiresPermissions("upms:user:update")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object update(@PathVariable("id") int id, UpmsUser upmsUser) {
-        ComplexResult result = FluentValidator.checkAll()
+    public Object update(
+            @PathVariable("id") int id,
+            @ApiParam(required = true, name = "userName", value = "用户账户")
+            @RequestParam(required = false, value = "userName") String userName,
+            @RequestParam(required = false, defaultValue = "", value = "realName") String realName,
+            @RequestParam(required = false, defaultValue = "", value = "avater") String avater,
+            @RequestParam(required = false, defaultValue = "", value = "phone") String phone,
+            @RequestParam(required = false, defaultValue = "", value = "email") String email,
+            @ApiParam(required = false, name = "sex", value = "用户性别0：女性，1：男性")
+            @RequestParam(required = false, defaultValue = "", value = "sex") String sex) {
+        /*ComplexResult result = FluentValidator.checkAll()
                 .on(upmsUser.getUsername(), new LengthValidator(1, 20, "帐号"))
                 .on(upmsUser.getRealname(), new NotNullValidator("姓名"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
+        }*/
+        UpmsUser upmsUser = new UpmsUser();
+        if(!userName.equals("")){
+            upmsUser.setUsername(userName);
+        }
+        if(!realName.equals("")){
+            upmsUser.setRealname(realName);
+        }
+        if(!avater.equals("")){
+            upmsUser.setAvatar(avater);
+        }
+        if(!phone.equals("")){
+            upmsUser.setPhone(phone);
+        }
+        if(!email.equals("")){
+            upmsUser.setEmail(email);
+        }
+        if(!sex.equals("")){
+            upmsUser.setSex(Byte.parseByte(sex));
         }
         // 不允许直接改密码
         upmsUser.setPassword(null);
