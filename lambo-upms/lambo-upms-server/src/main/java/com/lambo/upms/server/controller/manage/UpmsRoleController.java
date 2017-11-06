@@ -87,16 +87,23 @@ public class UpmsRoleController extends BaseController {
     @RequiresPermissions("upms:role:create")
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Object create(UpmsRole upmsRole) {
+    public Object create(
+            @RequestParam(required = true, value = "name") String name,
+            @RequestParam(required = false, value = "title") String title,
+            @RequestParam(required = false, value = "description") String description) {
+        UpmsRole upmsRole = new UpmsRole();
         ComplexResult result = FluentValidator.checkAll()
-                .on(upmsRole.getName(), new LengthValidator(1, 20, "名称"))
-                .on(upmsRole.getTitle(), new LengthValidator(1, 20, "标题"))
+                .on(name, new LengthValidator(1, 20, "名称"))
+                .on(title, new LengthValidator(1, 20, "标题"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
         }
         long time = System.currentTimeMillis();
+        upmsRole.setName(name);
+        upmsRole.setTitle(title);
+        upmsRole.setName(description);
         upmsRole.setCtime(time);
         upmsRole.setOrders(time);
         int count = upmsRoleService.insertSelective(upmsRole);
@@ -116,7 +123,7 @@ public class UpmsRoleController extends BaseController {
     @RequiresPermissions("upms:role:read")
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Object get(@PathVariable("id") int id, ModelMap modelMap) {
+    public Object get(@PathVariable("id") int id) {
         UpmsRole role = upmsRoleService.selectByPrimaryKey(id);
         return new UpmsResult(UpmsResultConstant.SUCCESS, role);
     }
@@ -125,15 +132,26 @@ public class UpmsRoleController extends BaseController {
     @RequiresPermissions("upms:role:update")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Object update(@PathVariable("id") int id, UpmsRole upmsRole) {
+    public Object update(
+            @PathVariable("id") int id,
+            @RequestParam(required = true, value = "name") String name,
+            @RequestParam(required = false, value = "title") String title,
+            @RequestParam(required = false, value = "description") String description) {
+        UpmsRole upmsRole = new UpmsRole();
+        if(description != null){
+            upmsRole.setDescription(description);
+        }
+        upmsRole.setName(description);
         ComplexResult result = FluentValidator.checkAll()
-                .on(upmsRole.getName(), new LengthValidator(1, 20, "名称"))
-                .on(upmsRole.getTitle(), new LengthValidator(1, 20, "标题"))
+                .on(name, new LengthValidator(1, 20, "名称"))
+                .on(title, new LengthValidator(1, 20, "标题"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
         }
+        upmsRole.setName(name);
+        upmsRole.setTitle(title);
         upmsRole.setRoleId(id);
         int count = upmsRoleService.updateByPrimaryKeySelective(upmsRole);
         return new UpmsResult(UpmsResultConstant.SUCCESS, count);
