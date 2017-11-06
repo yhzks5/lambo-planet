@@ -118,7 +118,6 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - Elastic Stack [https://www.elastic.co/downloads](https://www.elastic.co/downloads "Elastic Stack")
 - Nginx [http://nginx.org/en/download.html](http://nginx.org/en/download.html "Nginx")
 - Jenkins [http://updates.jenkins-ci.org/download/war/](http://updates.jenkins-ci.org/download/war/ "Jenkins")
-- dubbo-admin-2.5.3 [http://download.csdn.net/detail/shu
 
 ## 开发指南:
 
@@ -148,8 +147,6 @@ maven编译安装lambo/pom.xml文件即可
 > **lambo-upms**
 
 - 首先启动 lambo-upms-rpc-service(直接运行src目录下的LamboUpmsRpcServiceApplication#main方法启动) => lambo-upms-server(jetty)，然后按需启动对应子系统xxx的lambo-xxx-rpc-service(main方法) => lambo-xxx-webapp(jetty)
-
-![启动演示](project-bootstrap/start.png)
 
 - 访问 [http://127.0.0.1:1111/]("统一后台地址")，子系统菜单已经配置到lambo-upms权限中，不用直接访问子系统，默认帐号密码：admin/123456
 
@@ -317,7 +314,3 @@ maven编译安装lambo/pom.xml文件即可
 - [Git官网中文文档](https://git-scm.com/book/zh/v2 "Git官网中文文档")
 
 - [Thymeleaf](http://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html "Thymeleaf")
-
-## 许可证
-
-[MIT](LICENSE "MIT")
