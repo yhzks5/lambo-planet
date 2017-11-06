@@ -138,7 +138,7 @@ public class UpmsUserController extends BaseController {
             @ApiParam(required = false, name = "sex", value = "用户性别0：女性，1：男性")
             @RequestParam(required = false, defaultValue = "0", value = "sex") String sex
     ) {
-        /*ComplexResult result = FluentValidator.checkAll()
+        ComplexResult result = FluentValidator.checkAll()
                 .on(userName, new LengthValidator(1, 20, "帐号"))
                 .on(password, new LengthValidator(5, 32, "密码"))
                 .on(realName, new NotNullValidator("姓名"))
@@ -146,7 +146,7 @@ public class UpmsUserController extends BaseController {
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
-        }*/
+        }
         UpmsUser upmsUser = new UpmsUser();
         upmsUser.setUsername(userName);
         upmsUser.setRealname(realName);
@@ -190,14 +190,14 @@ public class UpmsUserController extends BaseController {
             @RequestParam(required = false, defaultValue = "", value = "email") String email,
             @ApiParam(required = false, name = "sex", value = "用户性别0：女性，1：男性")
             @RequestParam(required = false, defaultValue = "", value = "sex") String sex) {
-        /*ComplexResult result = FluentValidator.checkAll()
-                .on(upmsUser.getUsername(), new LengthValidator(1, 20, "帐号"))
-                .on(upmsUser.getRealname(), new NotNullValidator("姓名"))
+        ComplexResult result = FluentValidator.checkAll()
+                .on(userName, new LengthValidator(1, 20, "帐号"))
+                .on(realName, new NotNullValidator("姓名"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()) {
             return new UpmsResult(UpmsResultConstant.INVALID_LENGTH, result.getErrors());
-        }*/
+        }
         UpmsUser upmsUser = new UpmsUser();
         if(!userName.equals("")){
             upmsUser.setUsername(userName);
