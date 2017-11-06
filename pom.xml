@@ -21,7 +21,6 @@
     <modules>
         <module>lambo-common</module>
         <module>lambo-upms</module>
-        <module>lambo-ucenter</module>
         <module>lambo-demo</module>
     </modules>
 </project>
