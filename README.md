@@ -1,8 +1,4 @@
 # lambo
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/shuzheng/zheng/pulls)
-[![GitHub stars](https://img.shields.io/github/stars/shuzheng/zheng.svg?style=social&label=Stars)](https://github.com/shuzheng/zheng)
-[![GitHub forks](https://img.shields.io/github/forks/shuzheng/zheng.svg?style=social&label=Fork)](https://github.com/shuzheng/zheng)
 
 ## 前言
 
@@ -67,14 +63,6 @@ Protobuf & json | 数据序列化  | [https://github.com/google/protobuf](https:
 Jenkins | 持续集成工具  | [https://jenkins.io/index.html](https://jenkins.io/index.html)
 Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org/)
 
-#### 架构图
-
-![架构图](project-bootstrap/architect.png)
-
-#### 模块依赖
-
-![模块依赖](project-bootstrap/project.png)
-
 #### 模块介绍
 
 > lambo-common
@@ -85,11 +73,11 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 基于bootstrap实现的响应式Material Design风格的通用后台管理系统，`lambo`项目所有后台系统都是使用该模块界面作为前端展示。
 
-> zheng-upms
+> lambo-upms
 
 本系统是基于RBAC授权和基于用户授权的细粒度权限控制通用平台，并提供单点登录、会话管理和日志管理。接入的系统可自由定义组织、角色、权限、资源等。用户权限=所拥有角色权限合集+用户加权限-用户减权限，优先级：用户减权限>用户加权限>角色权限
 
-> zheng-ucenter
+> lambo-ucenter
 
 通用用户管理系统， 实现最常用的用户注册、登录、资料管理、个人中心、第三方登录等基本需求，支持扩展二次开发。
 
@@ -130,8 +118,7 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - Elastic Stack [https://www.elastic.co/downloads](https://www.elastic.co/downloads "Elastic Stack")
 - Nginx [http://nginx.org/en/download.html](http://nginx.org/en/download.html "Nginx")
 - Jenkins [http://updates.jenkins-ci.org/download/war/](http://updates.jenkins-ci.org/download/war/ "Jenkins")
-- dubbo-admin-2.5.3 [http://download.csdn.net/detail/shuzheng5201314/9733652](http://download.csdn.net/detail/shuzheng5201314/9733652 "dubbo-admin-2.5.3")
-- dubbo-admin-2.5.4-SNAPSHOT-jdk8 [http://download.csdn.net/detail/shuzheng5201314/9733657](http://download.csdn.net/detail/shuzheng5201314/9733657 "dubbo-admin-2.5.4-SNAPSHOT-jdk8")
+- dubbo-admin-2.5.3 [http://download.csdn.net/detail/shu
 
 ## 开发指南:
 
@@ -160,7 +147,7 @@ maven编译安装lambo/pom.xml文件即可
 
 > **lambo-upms**
 
-- 首先启动 lambo-upms-rpc-service(直接运行src目录下的ZhengUpmsRpcServiceApplication#main方法启动) => lambo-upms-server(jetty)，然后按需启动对应子系统xxx的lambo-xxx-rpc-service(main方法) => lambo-xxx-webapp(jetty)
+- 首先启动 lambo-upms-rpc-service(直接运行src目录下的LamboUpmsRpcServiceApplication#main方法启动) => lambo-upms-server(jetty)，然后按需启动对应子系统xxx的lambo-xxx-rpc-service(main方法) => lambo-xxx-webapp(jetty)
 
 ![启动演示](project-bootstrap/start.png)
 
@@ -242,7 +229,7 @@ maven编译安装lambo/pom.xml文件即可
 
 ### 参与开发
 
-首先谢谢大家支持，如果你希望参与开发，欢迎通过[Github](https://github.com/shuzheng/zheng "Github")上fork本项目，并Pull Request您的commit。
+首先谢谢大家支持，如果你希望参与开发，欢迎通过[Github](https://github.com/sunzhen086/lambo "Github")上fork本项目，并Pull Request您的commit。
 
 ### 常见问题
 
