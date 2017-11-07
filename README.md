@@ -1,15 +1,15 @@
-# lambo
+# lamboPlus
 
 ## 前言
 
-　　`lambo`项目正在慢慢成长中，目的不仅仅是一个开发架构，而是努力打造一套从 **前端模板** - **基础框架** - **分布式架构** - **开源项目** - **持续集成** - **自动化部署** - **系统监测** - **无缝升级** 的全方位J2EE企业级开发解决方案。
+　　`lamboPlus`项目专注于分布式架构,同时提供全方位J2EE企业级开发解决方案, 适用于大用户量、高并发场景下的互联网应用。
 
 ### 组织结构
 
 ``` lua
 lambo
 ├── lambo-common -- SSM框架公共模块
-├── lambo-admin -- 后台管理模板
+├── lambo-admin -- 后台管理前端模板
 ├── lambo-upms -- 用户权限管理系统
 |    ├── lambo-upms-common -- upms系统公共模块
 |    ├── lambo-upms-dao -- 代码生成模块，无需开发
@@ -17,12 +17,6 @@ lambo
 |    ├── lambo-upms-rpc-api -- rpc接口包
 |    ├── lambo-upms-rpc-service -- rpc服务提供者
 |    └── lambo-upms-server -- 用户权限系统及SSO服务端[端口:1111]
-├── lambo-ucenter -- 用户系统(包括第三方登录)
-|    ├── lambo-ucenter-common -- ucenter系统公共模块
-|    ├── lambo-ucenter-dao -- 代码生成模块，无需开发
-|    ├── lambo-ucenter-rpc-api -- rpc接口包
-|    ├── lambo-ucenter-rpc-service -- rpc服务提供者
-|    └── lambo-ucenter-web -- 网站前台[端口:4441]
 └── lambo-demo -- 示例模块(包含一些示例代码等)
      ├── lambo-demo-rpc-api -- rpc接口包
      ├── lambo-demo-rpc-service -- rpc服务提供者
@@ -43,8 +37,6 @@ MyBatis Generator | 代码生成  | [http://www.mybatis.org/generator/index.html
 PageHelper | MyBatis物理分页插件  | [http://git.oschina.net/free/Mybatis_PageHelper](http://git.oschina.net/free/Mybatis_PageHelper)
 Druid | 数据库连接池  | [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
 FluentValidator | 校验框架  | [https://github.com/neoremind/fluent-validator](https://github.com/neoremind/fluent-validator)
-Thymeleaf | 模板引擎  | [http://www.thymeleaf.org/](http://www.thymeleaf.org/)
-Velocity | 模板引擎  | [http://velocity.apache.org/](http://velocity.apache.org/)
 ZooKeeper | 分布式协调服务  | [http://zookeeper.apache.org/](http://zookeeper.apache.org/)
 Dubbo | 分布式服务框架  | [http://dubbo.io/](http://dubbo.io/)
 TBSchedule & elastic-job | 分布式调度框架  | [https://github.com/dangdangdotcom/elastic-job](https://github.com/dangdangdotcom/elastic-job)
@@ -71,15 +63,12 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 > lambo-admin
 
-基于bootstrap实现的响应式Material Design风格的通用后台管理系统，`lambo`项目所有后台系统都是使用该模块界面作为前端展示。
+基于iView实现的MVVM架构的前端系统。
 
 > lambo-upms
 
 本系统是基于RBAC授权和基于用户授权的细粒度权限控制通用平台，并提供单点登录、会话管理和日志管理。接入的系统可自由定义组织、角色、权限、资源等。用户权限=所拥有角色权限合集+用户加权限-用户减权限，优先级：用户减权限>用户加权限>角色权限
 
-> lambo-ucenter
-
-通用用户管理系统， 实现最常用的用户注册、登录、资料管理、个人中心、第三方登录等基本需求，支持扩展二次开发。
 
 ## 环境搭建
 
@@ -89,15 +78,15 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - Tomcat: 应用服务器
 - SVN|Git: 版本管理
 - Nginx: 反向代理服务器
-- Varnish: HTTP加速器
+- Node: 前端开发与构建环境
 - IntelliJ IDEA: 开发IDE
-- PowerDesigner: 建模工具
 - Navicat for MySQL: 数据库客户端
 
 #### 开发环境：
 - Jdk7+
 - Mysql5.5+
 - Redis
+- node6.11+
 - Zookeeper
 - ActiveMQ
 - Dubbo-admin
@@ -111,6 +100,7 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 - JDK7 [http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html "JDK7")
 - Maven [http://maven.apache.org/download.cgi](http://maven.apache.org/download.cgi "Maven")
+- Node [https://nodejs.org/en/](https://nodejs.org/en/ "Node")
 - Redis [https://redis.io/download](https://redis.io/download "Redis")
 - ActiveMQ [http://activemq.apache.org/download-archives.html](http://activemq.apache.org/download-archives.html "ActiveMQ")
 - ZooKeeper [http://www.apache.org/dyn/closer.cgi/zookeeper/](http://www.apache.org/dyn/closer.cgi/zookeeper/ "ZooKeeper")
@@ -121,7 +111,7 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 ## 开发指南:
 
-- 1、本机安装Jdk7、Mysql、Redis、Zookeeper、ActiveMQ并**启动相关服务**，使用默认配置默认端口即可
+- 1、本机安装Jdk7+、Node、Mysql、Redis、Zookeeper、ActiveMQ并**启动相关服务**，使用默认配置默认端口即可
 - 2、克隆源代码到本地并打开，**推荐使用IntelliJ IDEA**，本地编译并安装到本地maven仓库
 
 ### 修改本地Host
@@ -132,7 +122,10 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 ### 编译流程
 
-maven编译安装lambo/pom.xml文件即可
+- 打开IDEA,import project选择lambo根目录下的pom.xml(注意一定要选择到pom.xml)
+
+- 打开Maven-Project窗口(view-Tool Windows-Maven Projects),双击运行lambo-Lifecycle-install选项
+
 
 ### 启动顺序（后台）
 
@@ -140,17 +133,27 @@ maven编译安装lambo/pom.xml文件即可
 
 - 新建lambo数据库，导入project-datamodel文件夹下的lambo.sql
 
-- 修改各dao模块和rpc-service模块的redis.properties、jdbc.properties、generator.properties数据库连接等配置信息，其中master.redis.password、master.jdbc.password、slave.jdbc.password、generator.jdbc.password密码值使用了AES加密，请使用com.lambo.common.util.AESUtil工具类修改这些值
+- 修改各dao模块和rpc-service模块的redis.properties、jdbc.properties、generator.properties数据库连接等配置信息，其中master.redis.password、master.jdbc.password、slave.jdbc.password、generator.jdbc.password密码值使用了AES加密，请使用lambo-commmon项目下的com.lambo.common.util.AESUtil工具类修改这些值
 
-- 启动Zookeeper、Redis、ActiveMQ、Nginx（配置文件参考project-tools/nginx下的*.conf文件）
+- 启动Zookeeper、Redis
 
 > **lambo-upms**
 
-- 首先启动 lambo-upms-rpc-service(直接运行src目录下的LamboUpmsRpcServiceApplication#main方法启动) => lambo-upms-server(jetty)，然后按需启动对应子系统xxx的lambo-xxx-rpc-service(main方法) => lambo-xxx-webapp(jetty)
+- 首先启动 lambo-upms-rpc-service(运行src/main/java/com/lambo/upms/LamboUpmsRpcServiceApplication.java)
 
-- 访问 [http://127.0.0.1:1111/]("统一后台地址")，子系统菜单已经配置到lambo-upms权限中，不用直接访问子系统，默认帐号密码：admin/123456
+- 然后启动 lambo-upms-server(在Maven Project窗口里,打开lambo-upms-server下的Plugins,在jetty - jetty:run上右键debug lambo-upms-server)
 
-- 登录成功后，可在右上角切换已注册系统访问
+- 访问 [http://127.0.0.1:1111/swagger-ui.html]("后台Swagger接口文档地址")
+
+- 在sso-controller中使用/sso/login登录系统(admin 123456),然后就可以测试各个接口了
+
+> **lambo-admin**
+
+- 确认node安装正常,在cmd窗口执行node -v, 版本号返回v6.0.0以上即可
+
+- 在cmd窗口内cd到lambo-admin文件夹下,执行npm install
+
+- 之后执行npm install, 正常就可以看到登录页了
 
 ### 开发演示
 
@@ -177,6 +180,10 @@ maven编译安装lambo/pom.xml文件即可
 - 启动流程：优先rcp-service服务提供者，再启动其他webapp
 
 - 扩展流程：可扩展和拆分rpc-api和rpc-service模块，可按微服务拆分或场景拆分
+
+### 使用代码机生成代码
+
+- 参考lambo-common子项目下的README.md
 
 ### 部署方式
 
@@ -210,17 +217,14 @@ maven编译安装lambo/pom.xml文件即可
 
 - 配置文件放到`src/main/resources`目录下
 
-- 静态资源文件放到`src/main/webapp/resources`目录下
-
-- jsp文件，需要在`/WEB-INF/jsp`目录下
 
 - `RequestMapping`和返回物理试图路径的url尽量写全路径，如：`@RequestMapping("/manage")`、`return "/manage/index"`
 
 - `RequestMapping`指定method
 
-- 模块命名为`项目`-`子项目`-`业务`，如`lambo-cms-admin`
+- 模块命名为`项目`-`子项目`-`业务`，如`lambo-upms-role`
 
-- 数据表命名为：`子系统`_`表`，如`cms_article`
+- 数据表命名为：`子系统`_`表`，如`upms-role`
 
 ```
 
@@ -230,13 +234,11 @@ maven编译安装lambo/pom.xml文件即可
 
 ### 常见问题
 
-- Eclipse下，dubbo找不到dubbo.xsd报错，不影响使用，如果要解决，可参考 [http://blog.csdn.net/gjldwz/article/details/50555922](http://blog.csdn.net/gjldwz/article/details/50555922)
+- Eclipse下(不建议使用Eclipse)，dubbo找不到dubbo.xsd报错，不影响使用，如果要解决，可参考 [http://blog.csdn.net/gjldwz/article/details/50555922](http://blog.csdn.net/gjldwz/article/details/50555922)
 
 - 报lambo-xxx.jar包找不到,请按照文档编译顺序，将源代码编译并安装到本地maven仓库
 
 - lambo-upms-server访问报session不存在：因为没有启动redis服务
-
-- 界面没有样式：因为lambo-admin没有编译安装到本地仓库
 
 - linux下执行rpc-service脚本报“bin/bash^M 坏的解释器”，使用sed -i 's/\r$//' filename删除脚本中\r字符
 
