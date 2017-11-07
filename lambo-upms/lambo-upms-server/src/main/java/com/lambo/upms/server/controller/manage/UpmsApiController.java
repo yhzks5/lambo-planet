@@ -37,7 +37,7 @@ public class UpmsApiController extends BaseController {
     @Autowired
     private UpmsApiService upmsApiService;
 
-    @RequestMapping(value = "/getMenuTree",method = RequestMethod.GET)
+    @RequestMapping(value = "/menu/getList",method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "获取当前登录用户有权限的菜单")
     public Object getMenu(){
@@ -55,7 +55,7 @@ public class UpmsApiController extends BaseController {
         JSONArray jsonArr = new JSONArray();
         for(UpmsSystem upmsSystem : upmsSystems) {
             JSONObject rootNode = new JSONObject();
-            rootNode.put("id", upmsSystem.getSystemId());
+            rootNode.put("name", upmsSystem.getSystemId());
             rootNode.put("title", upmsSystem.getTitle());
             rootNode.put("description", upmsSystem.getDescription());
             rootNode.put("icon", upmsSystem.getIcon());
@@ -74,14 +74,14 @@ public class UpmsApiController extends BaseController {
      * @return
      */
     private Object menuTreeFactory(JSONObject treeNode, List<UpmsPermission> permissionList, boolean root){
-        int id = treeNode.getIntValue("id");
+        int id = treeNode.getIntValue("name");
         JSONArray childrenNodes = new JSONArray();
         Iterator<UpmsPermission> it = permissionList.iterator();
         while(it.hasNext()){
             UpmsPermission upmsPermission = it.next();
             if((root &&  upmsPermission.getPid() == 0) || (upmsPermission.getPid() == id && upmsPermission.getType() != 3)){
                 JSONObject node = new JSONObject();
-                node.put("id",upmsPermission.getPermissionId());
+                node.put("name",upmsPermission.getPermissionId());
                 node.put("permissionValue",upmsPermission.getPermissionValue());
                 node.put("title",upmsPermission.getName());
                 node.put("icon",upmsPermission.getIcon());
