@@ -88,6 +88,10 @@ export default {
 			})
        }
     }
+//    ,
+//    components:{
+//        'Alert': Alert
+//    }
 };
 </script>
 

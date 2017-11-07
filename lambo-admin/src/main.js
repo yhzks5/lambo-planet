@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import iView from 'iview';
+import lamboUi from 'lambo-ui';
 import VueRouter from 'vue-router';
 import {routers, otherRouter, appRouter} from './router';
 import Vuex from 'vuex';
@@ -18,6 +19,7 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueI18n);
 Vue.use(iView);
+Vue.use(lamboUi);
 
 // 自动设置语言
 const navLang = navigator.language;
