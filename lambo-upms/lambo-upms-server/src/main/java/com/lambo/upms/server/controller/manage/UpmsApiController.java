@@ -79,7 +79,7 @@ public class UpmsApiController extends BaseController {
         Iterator<UpmsPermission> it = permissionList.iterator();
         while(it.hasNext()){
             UpmsPermission upmsPermission = it.next();
-            if((root &&  upmsPermission.getPid() == 0) || (upmsPermission.getPid() == id && upmsPermission.getType() != 3)){
+            if((root &&  upmsPermission.getPid() == 0) || (!root && upmsPermission.getPid() == id && upmsPermission.getType() != 3)){
                 JSONObject node = new JSONObject();
                 node.put("name",upmsPermission.getPermissionId());
                 node.put("permissionValue",upmsPermission.getPermissionValue());
