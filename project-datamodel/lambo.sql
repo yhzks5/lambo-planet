@@ -212,7 +212,7 @@ CREATE TABLE `upms_system` (
 -- ----------------------------
 -- Records of upms_system
 -- ----------------------------
-INSERT INTO `upms_system` VALUES ('1', 'zmdi zmdi-shield-security', '', '#29A176', 'upms', '1', 'lambo-upms-server', '权限管理系统', '用户权限管理系统（RBAC细粒度用户权限、统一后台、单点登录、会话管理）', '1', '1');
+INSERT INTO `upms_system` VALUES ('1', 'zmdi zmdi-shield-security', '', '#29A176', '/upms', '1', 'lambo-upms-server', '权限管理系统', '用户权限管理系统（RBAC细粒度用户权限、统一后台、单点登录、会话管理）', '1', '1');
 
 -- ----------------------------
 -- Table structure for `upms_user`
