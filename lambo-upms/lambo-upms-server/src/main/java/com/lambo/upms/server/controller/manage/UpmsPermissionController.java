@@ -103,7 +103,7 @@ public class UpmsPermissionController extends BaseController {
     @ResponseBody
     public Object user(
             @PathVariable("id") int id,
-            @ApiParam(name = "type", required = true, value = "类型(1:目录,2:菜单,3:按钮)")
+            @ApiParam(name = "type", required = true, value = "权限类型(-1:减权限,1:增权限)")
             @RequestParam(required = false, value = "type") String type) {
 
         return upmsPermissionService.getTreeByUserId(id, NumberUtils.toByte(type));
