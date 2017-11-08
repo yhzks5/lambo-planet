@@ -1,7 +1,12 @@
-## Default Login Page For Lambo Project
+## Default Login Page
 
 ### use
 
 ``
 <LamboLogin></LamboLogin>
 ``
+
+### params
+
+- successForwardUrl 
+when login success then go to this url, generally you will fill a relative path
