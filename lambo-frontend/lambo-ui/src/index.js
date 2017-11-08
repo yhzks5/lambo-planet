@@ -1,7 +1,7 @@
 import Alert from './components/Alert';
 
 
-const version = '2.2.9';
+const version = '1.0.0';
 const install = function(Vue, config = {}) {
     if (install.installed) return;
 
