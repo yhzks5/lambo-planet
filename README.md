@@ -153,7 +153,7 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 - 在cmd窗口内cd到lambo-admin文件夹下,执行npm install
 
-- 之后执行npm install, 正常就可以看到登录页了
+- 之后执行npm run dev, 正常就可以看到登录页了
 
 ### 开发演示
 
