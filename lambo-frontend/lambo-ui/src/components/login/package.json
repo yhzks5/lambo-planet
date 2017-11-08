@@ -1,0 +1,11 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "Default Login Page For Lambo Project",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "sunzhen",
+  "license": "ISC"
+}
