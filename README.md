@@ -316,3 +316,7 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - [Git官网中文文档](https://git-scm.com/book/zh/v2 "Git官网中文文档")
 
 - [Thymeleaf](http://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html "Thymeleaf")
+
+### 感谢
+
+- 本项目基于[zheng](https://github.com/shuzheng/zheng "zheng")项目修改
