@@ -41,18 +41,12 @@ ZooKeeper | 分布式协调服务  | [http://zookeeper.apache.org/](http://zooke
 Dubbo | 分布式服务框架  | [http://dubbo.io/](http://dubbo.io/)
 TBSchedule & elastic-job | 分布式调度框架  | [https://github.com/dangdangdotcom/elastic-job](https://github.com/dangdangdotcom/elastic-job)
 Redis | 分布式缓存数据库  | [https://redis.io/](https://redis.io/)
-Solr & Elasticsearch | 分布式全文搜索引擎  | [http://lucene.apache.org/solr/](http://lucene.apache.org/solr/) [https://www.elastic.co/](https://www.elastic.co/)
 Quartz | 作业调度框架  | [http://www.quartz-scheduler.org/](http://www.quartz-scheduler.org/)
 Ehcache | 进程内缓存框架  | [http://www.ehcache.org/](http://www.ehcache.org/)
-ActiveMQ | 消息队列  | [http://activemq.apache.org/](http://activemq.apache.org/)
-JStorm | 实时流式计算框架  | [http://jstorm.io/](http://jstorm.io/)
-FastDFS | 分布式文件系统  | [https://github.com/happyfish100/fastdfs](https://github.com/happyfish100/fastdfs)
 Log4J | 日志组件  | [http://logging.apache.org/log4j/1.2/](http://logging.apache.org/log4j/1.2/)
 Swagger2 | 接口测试框架  | [http://swagger.io/](http://swagger.io/)
 sequence | 分布式高效ID生产  | [http://git.oschina.net/yu120/sequence](http://git.oschina.net/yu120/sequence)
-AliOSS & Qiniu & QcloudCOS | 云存储  | [https://www.aliyun.com/product/oss/](https://www.aliyun.com/product/oss/) [http://www.qiniu.com/](http://www.qiniu.com/) [https://www.qcloud.com/product/cos](https://www.qcloud.com/product/cos)
 Protobuf & json | 数据序列化  | [https://github.com/google/protobuf](https://github.com/google/protobuf)
-Jenkins | 持续集成工具  | [https://jenkins.io/index.html](https://jenkins.io/index.html)
 Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org/)
 
 #### 模块介绍
@@ -61,9 +55,9 @@ Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org
 
 Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisGenerator扩展插件、通用BaseService、工具类等。
 
-> lambo-admin
+> lambo-ui
 
-基于iView实现的MVVM架构的前端系统。
+基于iView实现的ui框架,提供重度封装的ui组件,包括登录页,菜单框架页等
 
 > lambo-upms
 
@@ -88,7 +82,6 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - Redis
 - node6.11+
 - Zookeeper
-- ActiveMQ
 - Dubbo-admin
 - Dubbo-monitor
 
@@ -102,16 +95,14 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - Maven [http://maven.apache.org/download.cgi](http://maven.apache.org/download.cgi "Maven")
 - Node [https://nodejs.org/en/](https://nodejs.org/en/ "Node")
 - Redis [https://redis.io/download](https://redis.io/download "Redis")
-- ActiveMQ [http://activemq.apache.org/download-archives.html](http://activemq.apache.org/download-archives.html "ActiveMQ")
 - ZooKeeper [http://www.apache.org/dyn/closer.cgi/zookeeper/](http://www.apache.org/dyn/closer.cgi/zookeeper/ "ZooKeeper")
 - Dubbo [http://dubbo.io/Download-zh.htm](http://dubbo.io/Download-zh.htm "Dubbo")
-- Elastic Stack [https://www.elastic.co/downloads](https://www.elastic.co/downloads "Elastic Stack")
 - Nginx [http://nginx.org/en/download.html](http://nginx.org/en/download.html "Nginx")
 - Jenkins [http://updates.jenkins-ci.org/download/war/](http://updates.jenkins-ci.org/download/war/ "Jenkins")
 
 ## 开发指南:
 
-- 1、本机安装Jdk7+、Node、Mysql、Redis、Zookeeper、ActiveMQ并**启动相关服务**，使用默认配置默认端口即可
+- 1、本机安装Jdk7+、Node、Mysql、Redis、Zookeeper并**启动相关服务**，使用默认配置默认端口即可
 - 2、克隆源代码到本地并打开，**推荐使用IntelliJ IDEA**，本地编译并安装到本地maven仓库
 
 ### 修改本地Host
@@ -315,15 +306,12 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 - [Nginx中文文档](http://tool.oschina.net/apidocs/apidoc?api=nginx-zh "Nginx中文文档")
 
-- [Freemarker在线手册](http://freemarker.foofun.cn/ "Freemarker在线中文手册")
-
 - [Velocity在线手册](http://velocity.apache.org/engine/devel/developer-guide.html "Velocity在线手册")
 
 - [Bootstrap在线手册](http://www.bootcss.com/ "Bootstrap在线手册")
 
 - [Git官网中文文档](https://git-scm.com/book/zh/v2 "Git官网中文文档")
 
-- [Thymeleaf](http://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html "Thymeleaf")
 
 ### 感谢
 
