@@ -127,7 +127,7 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - 打开Maven-Project窗口(view-Tool Windows-Maven Projects),双击运行lambo-Lifecycle-install选项
 
 
-### 启动顺序（后台）
+### 启动后台
 
 > 准备工作
 
@@ -147,13 +147,21 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 - 在sso-controller中使用/sso/login登录系统(admin 123456),然后就可以测试各个接口了
 
-> **lambo-admin**
+### 启动前台
+
+> 准备工作
 
 - 确认node安装正常,在cmd窗口执行node -v, 版本号返回v6.0.0以上即可
 
-- 在cmd窗口内cd到lambo-admin文件夹下,执行npm install
+> 启动upms系统前端
 
-- 之后执行npm run dev, 正常就可以看到登录页了
+- 打开命令行窗口,cd到lambo/lambo-fronted/lambo-ui,执行 npm link
+
+- cd到lambo/lambo-fronted/lambo-upms,执行 npm install
+
+- cd到lambo/lambo-fronted/lambo-upms/node_modules,执行npm link lambo-ui
+
+- cd到lambo/lambo-fronted/lambo-upms,执行 npm run dev,正常的话浏览器会自动打开一个窗口,显示登录页面
 
 ### 开发演示
 
