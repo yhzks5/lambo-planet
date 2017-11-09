@@ -20,4 +20,3 @@ new Vue({
   components: { App }
 })
 
-router.replace('login')

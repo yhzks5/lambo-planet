@@ -1,4 +1,4 @@
 <template>
-  <LamboLogin successForwardUrl="http://www.baidu.com"></LamboLogin>
+  <LamboLogin successForwardUrl="/#/frame/manage/user/index"></LamboLogin>
 </template>
 
