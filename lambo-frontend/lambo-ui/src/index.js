@@ -1,4 +1,5 @@
 import Login from './components/login';
+import Frame from './components/frame';
 
 
 const version = '1.0.0';
@@ -6,6 +7,7 @@ const install = function(Vue, config = {}) {
     if (install.installed) return;
 
     Vue.component("LamboLogin", Login);
+    Vue.component("LamboFrame", Frame);
 
 };
 
@@ -16,5 +18,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
     install,
-    Login
+    Login,
+    Frame
 };
